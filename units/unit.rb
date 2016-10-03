@@ -15,7 +15,7 @@ class Unit
   end
 
   def is_hero?
-    false
+    !self.class.const_get :ENEMY
   end
 
   def hp

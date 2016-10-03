@@ -7,10 +7,6 @@ class Warrior < Unit
     super(klass: self.class, name: name, level: level)
   end
 
-  def is_hero?
-    true
-  end
-
   def attack_options
     {
       slow: {
