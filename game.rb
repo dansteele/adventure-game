@@ -9,12 +9,12 @@ class Game
   def initialize
     puts "Enable debug? y/n"
     ans = gets.strip.chomp
-    @debug = true if positive_answer?(ans)
+    $debug = true if positive_answer?(ans)
   end
 
   def start
     @hero = create_player
-    Room.new(1, @hero, @debug)
+    Room.new(1, @hero)
   end
 
   def create_player

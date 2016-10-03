@@ -2,8 +2,7 @@ class Room
 
   include IOExtensions
 
-  def initialize(level, hero, debug = false)
-    @debug = debug
+  def initialize(level, hero)
     @hero = hero
     @level = level
     say "#{@hero.name} has entered a new room"
@@ -11,7 +10,7 @@ class Room
   end
 
   def fight_monster
-    monster = create_monster(Orc, @level)
+    monster = create_monster(Unit.random_unit, @level)
     Fight.new(@hero, monster)
   end
 
