@@ -1,13 +1,15 @@
 class Item
-  
+
   include IOExtensions
 
   def initialize(hero)
     @hero = hero
   end
 
-  def describe
-    self.class.const_get :DESCRIPTION
+  def find
+    say 'You found an item!', color: :green
+    say self.class::DESCRIPTION
+    use
   end
 
 end

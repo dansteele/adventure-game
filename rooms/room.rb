@@ -7,7 +7,7 @@ class Room
   def initialize(level, hero)
     @hero = hero
     @level = level
-    Trinket.random_trinket.new(@hero).use if item_spawned?
+    Trinket.random_trinket.new(@hero).find if item_spawned?
     say "#{@hero.name} has entered a new room"
 
     fight_monster
