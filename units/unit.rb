@@ -2,13 +2,14 @@ class Unit
 
   include IOExtensions
 
-  attr_accessor :name, :hp,:level
+  attr_accessor :name, :hp, :level, :criticals
 
   def self.random_unit
     ObjectSpace.each_object(Class).select { |klass| klass < self && klass.const_get(:ENEMY) }.sample
   end
 
   def initialize(klass: nil, name: nil, level:)
+    self.criticals = []
     @name = name
     @hp = klass.const_get(:BASE_HEALTH)
     @level = level
@@ -39,7 +40,17 @@ class Unit
   end
 
   def calc_damage(attack_option)
-    (rand(0.95..1.05) * (@level * attack_options[attack_option][:damage])).round(2)
+    (vary_float * (@level * attack_options[attack_option][:damage]) * crit).round(2)
+  end
+
+  def crit
+    return 1 if @criticals.empty?
+    say 'A critical hit!', color: :green
+    @criticals.shift
+  end
+
+  def vary_float
+    rand(0.95..1.05)
   end
 
   def receive_damage(amount, from)

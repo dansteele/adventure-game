@@ -2,6 +2,7 @@ class Rat < Unit
 
   ENEMY = true
   BASE_HEALTH = 2
+  DEATH_EXP = 15
 
   def initialize(level)
     super(klass: self.class, name: 'Rat', level: level)

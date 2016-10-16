@@ -9,7 +9,7 @@ class Fight
   end
 
   def begin_fight
-    say "A #{@monster.name} appeared!"
+    say "A #{@monster.name} appeared!", color: :yellow
     fight until @monster.dead? || @hero.dead?
     return win if @monster.dead?
     lose if @hero.dead?
@@ -43,5 +43,5 @@ class Fight
     say "The #{@monster.name} tries to attack you with a #{attack_type} attack"
     @monster.attack(@hero, attack_type)
   end
-  
+
 end
