@@ -11,7 +11,7 @@ class Unit
   def initialize(klass: nil, name: nil, level:)
     self.criticals = []
     @name = name
-    @hp = klass.const_get(:BASE_HEALTH)
+    @hp = klass.const_get(:BASE_HEALTH) + (1.3 * level * vary_float) 
     @level = level
   end
 
@@ -37,6 +37,10 @@ class Unit
 
   def dead?
     @hp <= 0
+  end
+
+  def alive?
+    !dead?
   end
 
   def calc_damage(attack_option)

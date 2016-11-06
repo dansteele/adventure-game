@@ -23,7 +23,7 @@ class Room
   end
 
   def item_spawned?
-    rand(0.0..1.0) > ITEM_SPAWN_CHANCE
+    rand(0.0..1.0) < ITEM_SPAWN_CHANCE
   end
 
 end

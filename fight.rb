@@ -10,9 +10,7 @@ class Fight
 
   def begin_fight
     say "A #{@monster.name} appeared!", color: :yellow
-    fight until @monster.dead? || @hero.dead?
-    return win if @monster.dead?
-    lose if @hero.dead?
+    fight_loop.call while @hero.alive? 
   end
 
   def win
@@ -23,13 +21,6 @@ class Fight
   def lose
     say "The #{@monster.name} killed you :(", color: :red
     say "You made it to level #{@hero.level}"
-  end
-
-  def fight
-    say "You have #{@hero.hp} hp"
-    say "The #{@monster.name} has #{@monster.hp} hp"
-    hero_attack
-    monster_attack
   end
 
   def hero_attack
@@ -44,4 +35,17 @@ class Fight
     @monster.attack(@hero, attack_type)
   end
 
+  private
+  def fight_loop
+    -> do
+      $estimated_game_length += 4
+      say "You have #{@hero.hp} hp", color: :lilac
+      say "The #{@monster.name} has #{@monster.hp} hp", color: :yellow
+      hero_attack
+      return win if @monster.dead?
+      monster_attack
+      return lose if @hero.dead?
+      say "-----"
+    end
+  end
 end

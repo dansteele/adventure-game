@@ -11,15 +11,15 @@ class Paladin < Unit
     {
       slow: {
         accuracy: 0.4,
-        damage: 2
+        damage: 2.5
       },
       medium: {
         accuracy: 0.7,
-        damage: 1.5
+        damage: 1.8
       },
       fast: {
         accuracy: 0.9,
-        damage: 1
+        damage: 1.2
       }
     }.with_indifferent_access
   end

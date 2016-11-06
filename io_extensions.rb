@@ -1,14 +1,10 @@
 module IOExtensions
 
-  POSITIVE_ANSWERS = %w(
-    y
-    yes
-    totes
-  )
+  POSITIVE_ANSWERS = %w(y yes totes)
 
   def say(sentance, options = nil, color: :white)
     puts
-    sleep 0.65 unless $debug
+    sleep 0.5 unless $debug
     puts sentance.colorize(color)
     puts options.join("  ") if options
   end
