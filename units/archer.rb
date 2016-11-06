@@ -3,7 +3,7 @@ class Archer < Unit
   ENEMY = false
   BASE_HEALTH = 40
 
-  def initialize(name: 'Warrior', level:)
+  def initialize(name: 'Archer', level:)
     super(klass: self.class, name: name, level: level)
   end
 

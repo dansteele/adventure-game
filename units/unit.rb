@@ -4,8 +4,16 @@ class Unit
 
   attr_accessor :name, :hp, :level, :criticals
 
-  def self.random_unit
-    ObjectSpace.each_object(Class).select { |klass| klass < self && klass.const_get(:ENEMY) }.sample
+  def self.allies
+    @@allies ||= ObjectSpace.each_object(Class).select do |klass| 
+      klass < self && !klass.const_get(:ENEMY)
+    end
+  end
+
+  def self.enemies
+    @@enemies ||= ObjectSpace.each_object(Class).select do |klass| 
+      klass < self && klass.const_get(:ENEMY)
+    end
   end
 
   def initialize(klass: nil, name: nil, level:)

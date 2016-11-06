@@ -3,8 +3,6 @@ require './dependencies'
 class Game
   include IOExtensions
 
-  attr :debug
-
   def initialize
     puts "Enable debug? y/n"
     ans = gets.strip.chomp
@@ -21,7 +19,8 @@ class Game
   def create_player
     say "Welcome to the world of adventure"
     name = ask(:text, "What's your name?")
-    hero = ask(:select, "What kind of hero are you?", )
+    hero = ask(:select, "What kind of hero are you?", 
+      Unit.allies.map { |u| u.to_s.downcase })
     hero.to_s.camelize.constantize.new(name: name, level: 1)
   end
 

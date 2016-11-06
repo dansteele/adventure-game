@@ -14,7 +14,7 @@ class Room
   end
 
   def fight_monster
-    monster = create_monster(Unit.random_unit, @level)
+    monster = create_monster(Unit.enemies.sample, @level)
     Fight.new(@hero, monster)
   end
 
