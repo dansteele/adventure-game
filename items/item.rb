@@ -7,9 +7,13 @@ class Item
   end
 
   def find
-    say 'You found an item!', color: :green
+    say "You found #{name}", color: :green
     say self.class::DESCRIPTION
     use
+  end
+
+  def name
+    raise 'Implement me'
   end
 
 end

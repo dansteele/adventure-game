@@ -10,7 +10,7 @@ class Fight
 
   def begin_fight
     say "A #{@monster.name} appeared!", color: :yellow
-    fight_loop.call while @hero.alive? 
+    fight_loop.call while @hero.alive?
   end
 
   def win
@@ -36,6 +36,7 @@ class Fight
   end
 
   private
+  
   def fight_loop
     -> do
       $estimated_game_length += 4

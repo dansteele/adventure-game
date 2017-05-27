@@ -1,6 +1,7 @@
 module IOExtensions
 
   POSITIVE_ANSWERS = %w(y yes totes)
+  VOWELS = %w(A E I O U)
 
   def say(sentance, options = nil, color: :white)
     puts

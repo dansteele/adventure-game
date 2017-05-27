@@ -2,24 +2,25 @@ class Unit
 
   include IOExtensions
 
-  attr_accessor :name, :hp, :level, :criticals
+  attr_accessor :name, :hp, :level, :criticals, :truesight
 
   def self.allies
-    @@allies ||= ObjectSpace.each_object(Class).select do |klass| 
+    @@allies ||= ObjectSpace.each_object(Class).select do |klass|
       klass < self && !klass.const_get(:ENEMY)
     end
   end
 
   def self.enemies
-    @@enemies ||= ObjectSpace.each_object(Class).select do |klass| 
+    @@enemies ||= ObjectSpace.each_object(Class).select do |klass|
       klass < self && klass.const_get(:ENEMY)
     end
   end
 
-  def initialize(klass: nil, name: nil, level:)
-    self.criticals = []
+  def initialize(klass:, name: 'Hero', level:)
+    @criticals = []
+    @truesight = 0
     @name = name
-    @hp = klass.const_get(:BASE_HEALTH) + (1.3 * level * vary_float) 
+    @hp = klass.const_get(:BASE_HEALTH) + (1.3 * level * vary_float)
     @level = level
   end
 
@@ -40,6 +41,11 @@ class Unit
   end
 
   def was_hit?(attack_option)
+    if @truesight > 0
+      @truesight -= 1
+      return true
+    end
+    @criticals.shift unless @criticals.empty?
     attack_options[attack_option][:accuracy] > rand(0.0..1.0)
   end
 
@@ -58,7 +64,7 @@ class Unit
   def crit
     return 1 if @criticals.empty?
     say 'A critical hit!', color: :green
-    @criticals.shift
+    @criticals.first
   end
 
   def vary_float
